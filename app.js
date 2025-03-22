@@ -49,21 +49,18 @@ class Circle {
       ) {
         //as long as the circle is in the vacinity
         if (this.r < maxCircleRadius) {
-          //as long as this circles radius is less than  circleRadius * 15 , then keep growing
           this.r += 1;
 
-          //while increasing the size if the border of the circle touches the border of the screen then stop the increase in size
           if (
             this.x + this.r >= screenWidth ||
             this.x - this.r <= 0 ||
             this.y + this.r >= screenHeight ||
             this.y - this.r <= 0
           ) {
-            if (this.r > 4) this.r -= 2; //arbitrary number 4
+            if (this.r > 4) this.r -= 2;
           }
         }
       } else if (this.r > this.minRadius) {
-        //if not in the vacinity and this circles radius is greater than the original radius of the circle then decrease the size
         this.r -= 1;
       }
     };
@@ -81,8 +78,8 @@ function generateCircles(amount) {
         randomRadius + Math.random() * (screenWidth - randomRadius * 2),
         randomRadius + Math.random() * (screenHeight - randomRadius * 2),
         randomRadius,
-        Math.round(Math.random() * (Math.random() * 3)) + 1, //not going in a random direction for some reason
-        Math.round(Math.random() * (Math.random() * 3)) + 1, //not going in a random direction for some reason
+        Math.round(Math.random() * (Math.random() * 3)) + 1,
+        Math.round(Math.random() * (Math.random() * 3)) + 1,
         `#${hexColors[Math.round(Math.random() * 4)]}`,
         `#${hexColors[Math.round(Math.random() * 4)]}`,
         Math.round(Math.random() * 20) + 2
@@ -106,17 +103,14 @@ setCanvasSize();
 window.addEventListener("resize", setCanvasSize);
 
 window.addEventListener("load", () => {
-  // This receives an event object, so we can't pass other stuff here
-
   const welcomeHtml = `<h1 class="tutorial"> Hover the mouse over the circles </h1>`;
 
-  const tutorialTemplate = document.createElement("div"); // Use "div" instead of "tutorial"
+  const tutorialTemplate = document.createElement("div");
   tutorialTemplate.innerHTML = welcomeHtml;
 
-  // Correct way to add a class
   tutorialTemplate.classList.add("tutorialBg");
 
-  document.body.appendChild(tutorialTemplate); // Append to the body
+  document.body.appendChild(tutorialTemplate);
 
   tutorialTimer = setTimeout(() => {
     tutorialTemplate.classList.add("tutorialEnd");
@@ -125,9 +119,6 @@ window.addEventListener("load", () => {
 
 const ctx = canvas.getContext("2d");
 
-//create a mouse instance and update the position according to the even listener coordinates
-//since we dont need inheritance we won't use classes , and since we don't need individuality either we won't use factory function
-//object literals dont have "this" keyword
 const mouse = {
   x: null,
   y: null,
@@ -138,7 +129,6 @@ window.addEventListener("mousemove", function (e) {
   mouse.y = e.pageY;
 });
 
-//create the circles and then render them and update them
 generateCircles(1400);
 
 function animate() {
